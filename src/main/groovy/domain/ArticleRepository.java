@@ -1,5 +1,7 @@
 package domain;
 
+import base.CommonUtill;
+
 import java.util.ArrayList;
 
 public class ArticleRepository {
@@ -14,7 +16,18 @@ public class ArticleRepository {
         this.articleList = articleList;
     }
 
+
     ArrayList<Article> articleList = new ArrayList<>();
+    ArrayList<Person> personList = new ArrayList<>();
+
+    public ArrayList<Person> getPersonList() {
+        return personList;
+    }
+
+    public void setPersonList(ArrayList<Person> personList) {
+        this.personList = personList;
+    }
+
     public ArticleRepository(){
         Article a1 = new Article(1, "안녕하세요 반갑습니다. 자바공부중이에요.", "냉무", commonUtill.getDate());
         Article a2 = new Article(2, "자바 질문좀할게요~", "냉무", commonUtill.getDate());
@@ -35,7 +48,6 @@ public class ArticleRepository {
                 return article;
             }
         }
-        System.out.println("존재하지 않는 게시물 번호입니다.");
         return null;
     }
 
@@ -57,5 +69,24 @@ public class ArticleRepository {
             }
         }
         return searchList;
+    }
+
+    public void addComment(Article article, String comment) {
+        Comments comments = new Comments(comment, commonUtill.getDate());
+        article.getCommentList().add(comments);
+    }
+
+    public void addPerson(String id, String password, String name) {
+        Person person = new Person(id, password, name);
+        personList.add(person);
+    }
+
+    public Person loginPerson(String id, String password) {
+        for (Person person : personList){
+            if (person.getId().equals(id) && person.getPassword().equals(password)){
+                return person;
+            }
+        }
+        return null;
     }
 }

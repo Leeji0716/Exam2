@@ -10,7 +10,7 @@ public class BoardApp {
         ArticleController articleController = new ArticleController();
 
         while(true){
-            System.out.print("명령어 : ");
+            articleController.loginCmd();
             String cmd = scan.nextLine();
 
             if (cmd.equals("exit")){
@@ -24,6 +24,9 @@ public class BoardApp {
                 case "delete" -> articleController.delete();
                 case "detail" -> articleController.detail();
                 case "search" -> articleController.search();
+                case "signup" -> articleController.signup();
+                case "login" -> articleController.login();
+                case "logout" -> articleController.logout();
                 default -> System.out.println("올바른 명령어를 입력해주세요.");
             }
         }
